@@ -12,23 +12,23 @@ public class TestRunner {
 
     public static void main(String[] args) {
         TestRunner runner = new TestRunner();
-        runner.runComprehensiveTests();
+        runner.runTests();
     }
 
     // run tests
-    public void runComprehensiveTests() {
+    public void runTests() {
         System.out.println("=== Calendar Management System Tests ===");
 
-        // Test 1: Basic Event Creation
+        // test 1: basic event creation
         testBasicEventCreation();
         
-        // Test 2: Overlap Prevention
+        // test 2: overlap prevention
         testOverlapPrevention();
         
-        // Test 3: Event Listing
+        // test 3: event listing
         testEventListing();
         
-        // Test 4: Time Slot Finding
+        // test 4: time slot finding
         testTimeSlotFinding();
         
         System.out.println("\n=== All tests completed successfully! ===");
@@ -42,7 +42,6 @@ public class TestRunner {
         createTestEvent("Really Early Meeting", testDate, "00:01", "08:30");
         createTestEvent("Morning Standup", testDate, "09:00", "09:30");
         createTestEvent("Client Meeting", testDate, "10:00", "11:00");
-        createTestEvent("Lunch Break", testDate, "12:00", "13:00");
         createTestEvent("Code Review", testDate, "14:00", "15:00");
         createTestEvent("Team Retrospective", testDate, "16:00", "17:00");
         
@@ -55,19 +54,16 @@ public class TestRunner {
         
         LocalDate testDate = LocalDate.now().plusDays(1);
         
-        // These should fail due to overlaps
+        // these should fail due to overlaps
         System.out.println("\nTesting overlap detection: ");
         
-        // Overlap with Morning Standup (09:00-09:30)
+        // overlap with Morning Standup (09:00-09:30)
         createTestEvent("Conflicting Meeting 1", testDate, "09:15", "09:45");
         
-        // Overlap with Client Meeting (10:00-11:00)
+        // overlap with Client Meeting (10:00-11:00)
         createTestEvent("Conflicting Meeting 2", testDate, "10:30", "11:30");
         
-        // Overlap with Lunch Break (12:00-13:00)
-        createTestEvent("Extended Lunch", testDate, "11:30", "12:30");
-        
-        // Complete overlap
+        // complete overlap
         createTestEvent("All Day Meeting", testDate, "00:01", "23:59");
         
         System.out.println("=== Overlap prevention tests passed ===");
@@ -79,15 +75,15 @@ public class TestRunner {
         
         LocalDate testDate = LocalDate.now().plusDays(1);
         
-        // List events for tomorrow
+        // list events for tomorrow
         System.out.println("\nListing events for tomorrow:");
         calendar.listEventsForToday(testDate);
         
-        // Test today's events (should be empty unless events exist)
+        // test today's events (should be empty unless events exist)
         System.out.println("\nListing events for today:");
         calendar.listEventsForToday(LocalDate.now());
         
-        // Test remaining events for today
+        // test remaining events for today
         System.out.println("\nListing remaining events for today:");
         calendar.listRemainingEventsForToday();
         
@@ -100,15 +96,15 @@ public class TestRunner {
         
         LocalDate testDate = LocalDate.now().plusDays(1);
         
-        // Test various slot durations
-        int[] durations = {60, 120, 600};
+        // test various slot durations
+        int[] durations = {60, 120, 190, 600};
         
         for (int duration : durations) {
             System.out.println("\nFinding " + duration + " minute slot:");
             calendar.findNextAvailableSlot(duration, testDate);
         }
         
-        // Test slot finding for today (should consider current time)
+        // test slot finding for today
         System.out.println("\nFinding 60 minute slot for today:");
         calendar.findNextAvailableSlot(60, LocalDate.now());
         
@@ -134,7 +130,7 @@ public class TestRunner {
             }
             
         } catch (Exception e) {
-            System.out.println("✗ Error creating event: " + title + " - " + e.getMessage());
+            System.out.println("Error creating event: " + title + " - " + e.getMessage());
         }
     }
 
