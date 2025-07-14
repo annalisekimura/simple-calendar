@@ -49,7 +49,8 @@ public class CalendarManager {
         if (dayEvents.isEmpty()) {
             System.out.println("No events scheduled for this day.");
         } else {
-            dayEvents.forEach(event -> System.out.println(event.getTitle()));
+            dayEvents.forEach(event -> System.out.println(
+                event.getTitle() + " from " + event.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")) + " - " + event.getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))));
         }
     }
 
@@ -71,7 +72,8 @@ public class CalendarManager {
         if (remainingEvents.isEmpty()) {
             System.out.println("No remaining events for today.");
         } else {
-            remainingEvents.forEach(event -> System.out.println(event.getTitle()));
+            remainingEvents.forEach(event -> System.out.println(
+                event.getTitle() + " from " + event.getStartTime().format(DateTimeFormatter.ofPattern("HH:mm")) + " - " + event.getEndTime().format(DateTimeFormatter.ofPattern("HH:mm"))));
         }
 
     }

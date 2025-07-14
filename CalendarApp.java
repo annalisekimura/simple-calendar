@@ -40,6 +40,7 @@ public class CalendarApp {
                     break;
                 case 6:
                     System.out.println("Thank you for using the Calendar Mangement System!");
+                    scanner.close();
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
